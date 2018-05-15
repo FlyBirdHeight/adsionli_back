@@ -20,3 +20,22 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 \Laravel\Passport\Passport::routes(function(\Laravel\Passport\RouteRegistrar $router) {
     $router->forAccessTokens();
 },['prefix' => 'api/oauth']);
+
+Route::middleware('api')->prefix('v1')->group(function (){
+    Route::get('/music','MusicController@getMusicList');
+    Route::get('/blog','BlogController@blog');
+    Route::prefix('upload')->group(function (){
+        Route::post('/music','MusicController@uploadMusic');
+    });
+    Route::prefix('add')->group(function (){
+        Route::post('/music','MusicController@addMusic');
+        Route::post('/addBlog','BlogController@addBlog');
+    });
+    Route::prefix('del')->group(function (){
+        Route::delete('/music/{id}','MusicController@delMusic');
+        Route::delete('/music/{id}','BlogController@delBlog');
+    });
+    Route::prefix('edit')->group(function (){
+        Route::put('/editBlog','BlogController@editBlog');
+    });
+});

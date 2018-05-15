@@ -51,8 +51,10 @@ class MusicController extends Controller
         }
     }
 
-    public function delMusic(Request $request){
-        $music = $this->music->delMusic($request->get('id'));
+    public function delMusic($id){
+        $music = $this->music->delMusic($id);
         return $this->info('success',$music);
     }
+
+
 }
