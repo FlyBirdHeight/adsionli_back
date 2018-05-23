@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RegisterMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redis;
 
 class UserController extends Controller
@@ -32,6 +34,7 @@ class UserController extends Controller
         $token = str_random(32);
         Redis::set($token,json_encode(['name'=>$name,'email'=>$email,'password'=>$password,'token'=>$token]));
         Redis::expire($token,21600);
-        return Redis::get($token);
+        Mail::to($email)->send(new RegisterMail($token,$name));
+        return json_encode(['status'=>'success','content'=>$token]);
     }
 }

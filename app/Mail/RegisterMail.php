@@ -12,15 +12,17 @@ class RegisterMail extends Mailable
 {
     use Queueable, SerializesModels;
     public $token;
+    public $name;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($token)
+    public function __construct($token,$name)
     {
         if (Redis::exists($token)){
-            $this->token = Redis::get($token);
+            $this->token = $token;
+            $this->name = $name;
         }
     }
 
@@ -33,9 +35,8 @@ class RegisterMail extends Mailable
     {
         return $this->view('mail')
             ->with([
-                'name' => $this->token->name,
-                'email' => $this->token->email,
-                'url' => '127.0.0.1:8080/#/success/'.$this->token->token,
+                'name' => $this->name,
+                'url' => '127.0.0.1:8080/#/success/'.$this->token,
             ]);
     }
 }
