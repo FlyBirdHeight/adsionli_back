@@ -30,6 +30,7 @@ Route::middleware('api')->prefix('v1')->group(function (){
     Route::prefix('add')->group(function (){
         Route::post('/music','MusicController@addMusic');
         Route::post('/addBlog','BlogController@addBlog');
+        Route::post('/user','UserController@register');
     });
     Route::prefix('del')->group(function (){
         Route::delete('/music/{id}','MusicController@delMusic');
