@@ -11,16 +11,16 @@ use Illuminate\Support\Facades\Redis;
 class RegisterMail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $token;
+    public $url;
     public $name;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($token,$name)
+    public function __construct($url,$name)
     {
-        $this->token = $token;
+        $this->url= $url;
         $this->name = $name;
     }
 
@@ -34,7 +34,7 @@ class RegisterMail extends Mailable
         return $this->view('mail')
             ->with([
                 'name' => $this->name,
-                'url' => '127.0.0.1:8080/#/success/'.$this->token,
+                'url' => $this->url,
             ]);
     }
 }

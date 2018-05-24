@@ -38,5 +38,6 @@ Route::middleware('api')->prefix('v1')->group(function (){
     });
     Route::prefix('edit')->group(function (){
         Route::put('/editBlog','BlogController@editBlog');
+        Route::put('/userToken','UserController@userTokenEdit');
     });
 });
