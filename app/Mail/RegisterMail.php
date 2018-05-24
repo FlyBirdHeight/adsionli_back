@@ -20,10 +20,8 @@ class RegisterMail extends Mailable
      */
     public function __construct($token,$name)
     {
-        if (Redis::exists($token)){
-            $this->token = $token;
-            $this->name = $name;
-        }
+        $this->token = $token;
+        $this->name = $name;
     }
 
     /**
