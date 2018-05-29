@@ -19,19 +19,20 @@ class UserController extends Controller
     }
 
     public function login(Request $request){
-        $field = filter_var($request->get('email'),FILTER_VALIDATE_EMAIL)?'email':'phone';
-        $request->merge([$field=>$request->get('email')]);
-        if(\Auth::attempt($request->only($field,'password'))){
+        if(\Auth::attempt($request->only('email','password'))){
             $user = \Auth::user();
-            $tokens = $this->authenticate();
-            if($user->isAdmin()){
+            if ($user->is_access=="true"){
+//                $tokens = $this->authenticate();
+                $tokens = [
+                    'token_type' => "Bear",
+                    'access_token' => "gfGqboDhNxiwXr8C7iqOQReKawHjvFzjAUrjswt2"
+                ];
                 return json_encode(['status' => "success", 'token' => $tokens,'userInfo'=>$user]);
             }else{
-                $user = $this->user->getUserById($user->id);
+                return json_encode(['status' => 'error','content'=>'未完成邮箱认证，无法登陆']);
             }
-            return json_encode(['status' => "success", 'token' => $tokens,'userInfo'=>$user]);
         }
-        return json_encode(['status' => 'error']);
+        return json_encode(['status' => 'error','content'=>'错误']);
     }
 
     public function register(Request $request){
@@ -59,7 +60,7 @@ class UserController extends Controller
             if(Redis::exists($token)){
                 return json_encode(['status'=>'error','content'=>'你已经完成了注册，请前往邮箱验证，可能存在于邮箱垃圾箱中']);
             }else{
-                if ($user->is_access=="true"){
+                if ($user[0]->is_access=="true"){
                     return json_encode(['status'=>'true','content'=>'你已经完成了注册且认证过，请勿重新注册']);
                 }else{
                     $user->delete();
@@ -74,11 +75,13 @@ class UserController extends Controller
         $user = $this->user->findByToken($token);
         if ($user->is_access=="false"){
             if (Redis::exists($token)){
-                $user->token = str_random(32);
+//                $user->token = str_random(32);
                 $user->is_access = "true";
                 $user->save();
+                Redis::del($token);
                 return json_encode(['status'=>'success']);
             }else{
+                $user->delete();
                 return json_encode(['status'=>'overtime']);
             }
         }else{

@@ -4,7 +4,7 @@
             <span style="font-size: 20px;font-weight: 600;">AdsionLi -- 属于AdsionLi的个人站点</span>
         </div>
     </div>
-    <div style="margin: auto;width: 750px;text-align: center;">
+    <div style="margin: auto;width: 100%;text-align: center;">
         <div style="font-size: 20px;text-align: center;margin-top: 60px;">
             Hello,欢迎{{$name}}加入AdsionLi的个人站点进行交流！
             <img src="http://p53z0yfgy.bkt.clouddn.com/jump.gif" alt="50*50" width="50px" height="50px">
