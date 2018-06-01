@@ -1,0 +1,33 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Repositories\FileRepository;
+use App\utils\Responses;
+use Illuminate\Http\Request;
+
+class FileController extends Controller
+{
+    protected $file;
+    use Responses;
+    public function __construct(FileRepository $fileRepository)
+    {
+        $this->file = $fileRepository;
+    }
+
+    public function uploadImage(Request $request){
+        if ($request->hasFile('image')){
+            $file = $request->file('image');
+            $file_size = $file->getClientSize();
+            $file_name = time().$file->getClientOriginalName();
+            $file_type = $file->getClientOriginalExtension();
+            $user_id = $request->get('userId');
+            $url = 'http://127.0.0.1/images/'.$file_name;
+            $file->move('images/',$file_name);
+            $image = $this->file->addImage(['name'=>$file_name,'url'=>$url,'user_id'=>$user_id,'type'=>$file_type,'size'=>$file_size]);
+            return $this->info('success',$image);
+        }else{
+            return json_encode(['status'=>'error']);
+        }
+    }
+}
