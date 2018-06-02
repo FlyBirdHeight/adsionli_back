@@ -20,10 +20,6 @@ class CommentRepository
 
     public function addComment(array $arr){
         $comment = Comment::create($arr);
-        if (isset($comment)){
-            return 'success';
-        }else{
-            return 'error';
-        }
+        return $comment;
     }
 }

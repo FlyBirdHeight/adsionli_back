@@ -14,6 +14,6 @@ class ChatController extends Controller
 
     public function sendMessage(Request $request){
         $client_id = $request->get('client_id');
-
+        
     }
 }

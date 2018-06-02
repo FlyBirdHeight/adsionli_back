@@ -28,20 +28,24 @@ Route::middleware('api')->prefix('v1')->group(function (){
 
     Route::post('/blog','BlogController@all');
     Route::post('/login','UserController@login');
+
     Route::prefix('upload')->group(function (){
         Route::post('/music','MusicController@uploadMusic');
         Route::post('/image','FileController@uploadImage');
     });
+
     Route::prefix('add')->group(function (){
         Route::post('/music','MusicController@addMusic');
         Route::post('/addBlog','BlogController@addBlog');
         Route::post('/user','UserController@register');
         Route::post('/comment','BlogController@addComment');
     });
+
     Route::prefix('del')->group(function (){
         Route::delete('/music/{id}','MusicController@delMusic');
         Route::delete('/music/{id}','BlogController@delBlog');
     });
+
     Route::prefix('edit')->group(function (){
         Route::put('/editBlog','BlogController@editBlog');
         Route::put('/userToken','UserController@userTokenEdit');

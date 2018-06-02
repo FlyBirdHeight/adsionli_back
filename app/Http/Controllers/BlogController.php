@@ -6,6 +6,7 @@ use App\Repositories\BlogRepository;
 use App\Repositories\CommentRepository;
 use App\utils\Responses;
 use Illuminate\Http\Request;
+use function PHPSTORM_META\type;
 
 class BlogController extends Controller
 {
@@ -24,10 +25,10 @@ class BlogController extends Controller
      * post
      */
     public function all(Request $request){
-        $blog = $this->blog->all($request->get('page'));
+        $blog = $this->blog->all($request->get('page'),$request->get('count'));
         \Log::info('see all blog');
         if (count($blog)!=0){
-            return $this->info('success',$blog);
+            return $this->info('success',['blogs'=>$blog,'number'=>$this->blog->blogCount()]);
         }else{
             \Log::error('blog empty');
             return $this->info('error','empty');
@@ -74,15 +75,16 @@ class BlogController extends Controller
 
     public function addComment(Request $request){
         $data = [
-            'bolg_id' => $request->get('blog_id'),
+            'blog_id' => $request->get('blog_id'),
             'user_id' => $request->get('user_id'),
             'body' => $request->get('body'),
         ];
         $status = $this->comment->addComment($data);
-        if ($status == 'success'){
-            return $this->info($status,'success');
+        $status->user;
+        if ($status != null){
+            return $this->info('success',$status);
         }else{
-            return $this->info($status,'error');
+            return $this->info('error','error');
         }
     }
 }

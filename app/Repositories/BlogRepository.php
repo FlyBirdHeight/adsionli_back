@@ -20,12 +20,22 @@ class BlogRepository
         return $blog;
     }
 
-    public function all($page){
+    public function all($page,$count){
         if($page == 1){
-            $blog = Blog::orderBy('created_at','desc')->skip(0)->limit(10)->get();
+            $blogs = Blog::orderBy('created_at','desc')->skip(0)->limit($count)->get();
+            foreach ($blogs as $blog){
+                $blog->tag;
+            }
         }else{
-            $blog =  Blog::orderBy('created_at','desc')->skip(($page-1)*10)->limit(10)->get();
+            $blogs =  Blog::orderBy('created_at','desc')->skip(($page-1)*$count)->limit($count)->get();
+            foreach ($blogs as $blog){
+                $blog->tag;
+            }
         }
-        return $blog;
+        return $blogs;
+    }
+
+    public function blogCount(){
+        return count(Blog::all());
     }
 }
