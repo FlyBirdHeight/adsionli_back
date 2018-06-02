@@ -23,9 +23,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::middleware('api')->prefix('v1')->group(function (){
     Route::get('/music','MusicController@getMusicList');
-    Route::get('/blog','BlogController@blog');
+    Route::get('/blog/{id}','BlogController@blog');
     Route::get('/blog/{id}/comment','BlogController@comment');
-//    Route::get('/notify','');
+
+    Route::post('/blog','BlogController@all');
     Route::post('/login','UserController@login');
     Route::prefix('upload')->group(function (){
         Route::post('/music','MusicController@uploadMusic');

@@ -13,6 +13,6 @@ class Comment extends Model
     }
 
     public function user(){
-        return $this->belongsTo(User::class,'user_id')->select('avatar','name');
+        return $this->belongsTo(User::class,'user_id')->select('name','id','avatar');
     }
 }
