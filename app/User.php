@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','token','is_access'
+        'name', 'email', 'password','token','is_access','avatar'
     ];
 
     /**
@@ -36,5 +36,9 @@ class User extends Authenticatable
     public function routeNotificationForMail()
     {
         return $this->email_address;
+    }
+
+    public function comment(){
+        return $this->hasMany(Comment::class,'user_id');
     }
 }

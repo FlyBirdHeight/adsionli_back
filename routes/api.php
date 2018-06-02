@@ -24,6 +24,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::middleware('api')->prefix('v1')->group(function (){
     Route::get('/music','MusicController@getMusicList');
     Route::get('/blog','BlogController@blog');
+    Route::get('/blog/{id}/comment','BlogController@comment');
 //    Route::get('/notify','');
     Route::post('/login','UserController@login');
     Route::prefix('upload')->group(function (){
@@ -34,6 +35,7 @@ Route::middleware('api')->prefix('v1')->group(function (){
         Route::post('/music','MusicController@addMusic');
         Route::post('/addBlog','BlogController@addBlog');
         Route::post('/user','UserController@register');
+        Route::post('/comment','BlogController@addComment');
     });
     Route::prefix('del')->group(function (){
         Route::delete('/music/{id}','MusicController@delMusic');
@@ -43,4 +45,5 @@ Route::middleware('api')->prefix('v1')->group(function (){
         Route::put('/editBlog','BlogController@editBlog');
         Route::put('/userToken','UserController@userTokenEdit');
     });
+
 });
