@@ -41,4 +41,8 @@ class User extends Authenticatable
     public function comment(){
         return $this->hasMany(Comment::class,'user_id');
     }
+
+    public function chatRoom(){
+        return $this->belongsToMany(ChatRoom::class,'user_chatRoom','user_id ','chatRoom_id')->withTimestamps();
+    }
 }
