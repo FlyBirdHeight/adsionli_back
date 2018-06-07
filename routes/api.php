@@ -39,6 +39,8 @@ Route::middleware('api')->prefix('v1')->group(function (){
         Route::post('/addBlog','BlogController@addBlog');
         Route::post('/user','UserController@register');
         Route::post('/comment','BlogController@addComment');
+        Route::post('/room','ChatController@addChatRoom');
+        Route::post('/joinRoom','ChatController@joinRoom');
     });
 
     Route::prefix('del')->group(function (){
@@ -49,6 +51,10 @@ Route::middleware('api')->prefix('v1')->group(function (){
     Route::prefix('edit')->group(function (){
         Route::put('/editBlog','BlogController@editBlog');
         Route::put('/userToken','UserController@userTokenEdit');
+        Route::patch('/chatRoom','ChatController@editRoom');
     });
 
+//    Route::prefix('chat')->group(function (){
+//
+//    });
 });

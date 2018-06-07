@@ -31,4 +31,8 @@ class UserRepository
         $user = User::where('token',$token)->first();
         return $user;
     }
+
+    public function findUserByid($id){
+        return User::findOrFail($id);
+    }
 }
