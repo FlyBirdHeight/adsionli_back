@@ -36,7 +36,6 @@ class UserController extends Controller
     }
 
     public function register(Request $request){
-//        return $this->user->findUser($request->get('email'));
         if($this->user->findUser($request->get('email')) == "none"){
             $name = $request->get('name');
             $email = $request->get('email');
