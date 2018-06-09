@@ -11,9 +11,9 @@ class ShirleyController extends Controller
     public function login(Request $request){
         $user = User1::where('user_name',$request->get('user_name'))->first();
         if($user['user_password'] == $request->get('user_password')){
-            return json_encode(['status' => "success",'user'=>$user]);
+            return $user;
         }
-        return json_encode(['status' => 'error','content'=>'错误']);
+        return 'error';
     }
 
     public function register(Request $request){
@@ -41,7 +41,7 @@ class ShirleyController extends Controller
         $user->m_major = $request->get('m_major');
         $user->m_class = $request->get('m_class');
         $user->save();
-        return json_encode(['status'=>'success']);
+        return 'success';
     }
 
     public function editUserPassword(Request $request){
@@ -49,9 +49,9 @@ class ShirleyController extends Controller
         if ($user['password'] == $request->get('oldPassword')){
             $user->password = $request->get('password');
             $user->save();
-            return json_encode(['status'=>'success']);
+            return 'success';
         }else{
-            return json_encode(['status'=>'error']);
+            return 'error';
         }
     }
 
@@ -66,9 +66,9 @@ class ShirleyController extends Controller
             $file->move('images/',$file_name);
             $image = Image::make('images/'.$file_name)->resize(150,150)->save('images/'.$file_name);
             $image = $this->file->addImage(['name'=>$file_name,'url'=>$url,'user_id'=>$user_id,'type'=>$file_type,'size'=>$file_size]);
-            return $this->info('success',$image);
+            return $url;
         }else{
-            return json_encode(['status'=>'error']);
+            return 'error';
         }
     }
 }
