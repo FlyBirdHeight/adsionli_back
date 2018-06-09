@@ -35,7 +35,7 @@ class ShirleyController extends Controller
     }
 
     public function editUser(Request $request){
-        $user = User1::findOrFail($request->get('userId'));
+        $user = User1::findOrFail($request->get('id'));
         $user->sex = $request->get('sex');
         $user->birthday = $request->get('birthday');
         $user->m_major = $request->get('m_major');
@@ -45,7 +45,7 @@ class ShirleyController extends Controller
     }
 
     public function editUserPassword(Request $request){
-        $user = User1::findOrFail($request->get('userId'));
+        $user = User1::findOrFail($request->get('id'));
         if ($user['user_passwork'] == $request->get('oldPasswork')){
             $user->user_passwork = $request->get('passwork');
             $user->save();
