@@ -46,8 +46,8 @@ class ShirleyController extends Controller
 
     public function editUserPassword(Request $request){
         $user = User1::findOrFail($request->get('userId'));
-        if ($user['password'] == $request->get('oldPassword')){
-            $user->password = $request->get('password');
+        if ($user['user_passwork'] == $request->get('oldPasswork')){
+            $user->user_passwork = $request->get('passwork');
             $user->save();
             return 'success';
         }else{
