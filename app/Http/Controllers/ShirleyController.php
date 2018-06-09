@@ -74,4 +74,8 @@ class ShirleyController extends Controller
             return 'error';
         }
     }
+
+    public function user($id){
+        return User1::findOrFail($id);
+    }
 }
