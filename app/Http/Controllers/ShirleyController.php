@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\MenuPo1;
+use App\Special1;
+use App\TalentShow1;
 use App\User;
 use App\User1;
 use Illuminate\Http\Request;
@@ -31,6 +34,10 @@ class ShirleyController extends Controller
             'm_class'=> '',
         ];
         $user = User1::create($data);
+        $talents = count(TalentShow1::all());
+        if ($talents<5){
+            $talent = TalentShow1::create(['avatarId'=>$user['image'],'nickName'=>$user['user_name']]);
+        }
         return 'success';
     }
 
@@ -64,5 +71,47 @@ class ShirleyController extends Controller
 
     public function user($id){
         return User1::findOrFail($id);
+    }
+
+    public function special(){
+        $special = Special1::orderBy('likeNum','desc')->skip(0)->limit(5)->get();
+        if (count($special)!=0){
+            return $special;
+        }else{
+            return 'empty';
+        }
+    }
+
+    public function addSpecial(Request $request){
+        $data = [
+            'title'=>$request->get('title'),
+            'content' => $request->get('content'),
+            'commentNum' => 0,
+            'likeNum'=>0
+        ];
+        $special = Special1::create($data);
+        $menupols = count(MenuPo1::all());
+        if ($menupols<6){
+            MenuPo1::create(['commentNum'=>"0",'dishName'=>$special['title'],'dishIntro'=>$special['content'],'likeNum'=>"0"]);
+        }
+        return 'success';
+    }
+
+    public function getSpecialByCommentNum(){
+        $special = MenuPo1::orderBy('commentNum','desc')->skip(0)->limit(6)->get();
+        if (count($special)!=0){
+            return $special;
+        }else{
+            return 'empty';
+        }
+    }
+
+    public function getSpecialUser(){
+        $user = TalentShow1::skip(0)->limit(5)->get();
+        if (count($user)!=0){
+            return $user;
+        }else{
+            return 'empty';
+        }
     }
 }

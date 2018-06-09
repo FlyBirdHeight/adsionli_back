@@ -66,4 +66,8 @@ Route::middleware('api')->prefix('v2')->group(function (){
     Route::post('editUserPassword','ShirleyController@editUserPassword');
     Route::post('uploadImg','ShirleyController@uploadImg');
     Route::get('user/{id}','ShirleyController@user');
+    Route::get('special','ShirleyController@special');
+    Route::post('addSpecial','ShirleyController@special');
+    Route::get('menupol','ShirleyController@getSpecialByCommentNum');
+    Route::get('userSpecial','ShirleyController@getSpecialUser');
 });
