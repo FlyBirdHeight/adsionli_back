@@ -117,7 +117,7 @@ class ShirleyController extends Controller
     }
 
     public function getMessage($id){
-        $message = Message1::where('user_id',$id)->orderBy('created_at','desc')->get();
+        $message = Message1::where('userId',$id)->orderBy('created_at','desc')->get();
         if (count($message)!=0){
             return $message;
         }else{
