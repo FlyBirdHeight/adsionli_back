@@ -9,7 +9,7 @@ class ShirleyController extends Controller
 {
     public function login(Request $request){
         $user = User1::where('user_name',$request->get('user_name'))->get();
-        return $user->get('user_password');
+        return $user->user_password;
         if($user['user_password'] == $request->get('user_password')){
             return json_encode(['status' => "success",'user'=>$user]);
         }
