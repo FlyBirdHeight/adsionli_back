@@ -19,7 +19,7 @@ class ShirleyController extends Controller
     public function register(Request $request){
         $data = [
             'user_name'=>$request->get('user_name'),
-            'user_password' => $request->get('user_password'),
+            'user_passwork' => $request->get('user_passwork'),
             'phone' => $request->get('phone'),
             'image' => 'http://onasmniwj.bkt.clouddn.com/avatars/f94a76806a6c142145300d55543adcbc.jpg',
             'height'=> '',
