@@ -56,23 +56,10 @@ class ShirleyController extends Controller
     }
 
     public function uploadImg(Request $request){
-        if ($request->hasFile('image')){
-            $file = $request->file('image');
-            $file_size = $file->getClientSize();
-            $file_name = time().$file->getClientOriginalName();
-            $file_type = $file->getClientOriginalExtension();
-            $user_id = $request->get('userId');
-            $url = 'http://101.132.71.227/images/'.$file_name;
-            $file->move('images/',$file_name);
-            $image = Image::make('images/'.$file_name)->resize(150,150)->save('images/'.$file_name);
-            $image = $this->file->addImage(['name'=>$file_name,'url'=>$url,'user_id'=>$user_id,'type'=>$file_type,'size'=>$file_size]);
-            $user = User1::findOrFail($request->get('userId'));
-            $user->image = $url;
-            $user->save();
-            return 'success';
-        }else{
-            return 'error';
-        }
+        $user = User1::findOrFail($request->get('id'));
+        $user->image = $request->get('image');
+        $user->save();
+        return 'success';
     }
 
     public function user($id){
