@@ -11,7 +11,7 @@ class ShirleyController extends Controller
     public function login(Request $request){
         $user = User1::where('user_name',$request->get('user_name'))->first();
         if($user['user_password'] == $request->get('user_password')){
-            return json_encode(['user'=>$user]);
+            return $user;
         }
         return 'error';
     }
