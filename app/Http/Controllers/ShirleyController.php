@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\MenuPo1;
+use App\Message1;
 use App\Special1;
 use App\TalentShow1;
 use App\User;
@@ -110,6 +111,15 @@ class ShirleyController extends Controller
         $user = TalentShow1::skip(0)->limit(5)->get();
         if (count($user)!=0){
             return $user;
+        }else{
+            return 'empty';
+        }
+    }
+
+    public function getMessage($id){
+        $message = Message1::where('user_id',$id)->orderBy('created_at','desc')->get();
+        if (count($message)!=0){
+            return $message;
         }else{
             return 'empty';
         }
