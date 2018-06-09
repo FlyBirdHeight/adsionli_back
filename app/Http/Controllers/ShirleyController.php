@@ -31,7 +31,7 @@ class ShirleyController extends Controller
             'm_class'=> '',
         ];
         $user = User1::create($data);
-        return json_encode(['status'=>'success','user'=>$user]);
+        return $user;
     }
 
     public function editUser(Request $request){
