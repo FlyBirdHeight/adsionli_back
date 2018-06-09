@@ -28,7 +28,6 @@ class FileController extends Controller
             $file->move('images/',$file_name);
             $image = Image::make('images/'.$file_name)->resize(150,150)->save('images/'.$file_name);
             $image = $this->file->addImage(['name'=>$file_name,'url'=>$url,'user_id'=>$user_id,'type'=>$file_type,'size'=>$file_size]);
-
             return $this->info('success',$image);
         }else{
             return json_encode(['status'=>'error']);

@@ -62,4 +62,7 @@ Route::middleware('api')->prefix('v1')->group(function (){
 Route::middleware('api')->prefix('v2')->group(function (){
     Route::post('login','ShirleyController@login');
     Route::post('register','ShirleyController@register');
+    Route::post('editUser','ShirleyController@editUser');
+    Route::post('editUserPassword','ShirleyController@editUserPassword');
+    Route::post('uploadImg','ShirleyController@uploadImg');
 });
