@@ -70,5 +70,5 @@ Route::middleware('api')->prefix('v2')->group(function (){
     Route::post('addSpecial','ShirleyController@special');
     Route::get('menupol','ShirleyController@getSpecialByCommentNum');
     Route::get('userSpecial','ShirleyController@getSpecialUser');
-    Route::get('message','ShirleyController@getMessage');
+    Route::get('message/{id}','ShirleyController@getMessage');
 });
