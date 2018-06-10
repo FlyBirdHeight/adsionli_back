@@ -84,13 +84,17 @@ class ShirleyController extends Controller
     }
 
     public function addSpecial(Request $request){
+        $img = $request->get('imgId');
+        if ($img == ""){
+            $img = "http://bmob-cdn-14824.b0.upaiyun.com/2018/06/10/e672d16f0ddf42e5a49ba8318415921e.jpg";
+        }
         $data = [
             'title'=>$request->get('title'),
             'content' => $request->get('content'),
             'commentNum' => 0,
             'likeNum'=>0,
             'user_id'=>$request->get('user_id'),
-            'imgId' => $request->get('imgId')
+            'imgId' => $img
         ];
         $special = Special1::create($data);
         $menupols = count(MenuPo1::all());
