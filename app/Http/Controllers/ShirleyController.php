@@ -88,7 +88,9 @@ class ShirleyController extends Controller
             'title'=>$request->get('title'),
             'content' => $request->get('content'),
             'commentNum' => 0,
-            'likeNum'=>0
+            'likeNum'=>0,
+            'user_id'=>$request->get('user_id'),
+            'imgId' => $request->get('imgId')
         ];
         $special = Special1::create($data);
         $menupols = count(MenuPo1::all());
