@@ -95,7 +95,7 @@ class ShirleyController extends Controller
         $special = Special1::create($data);
         $menupols = count(MenuPo1::all());
         if ($menupols<6){
-            MenuPo1::create(['commentNum'=>"0",'dishName'=>$special['title'],'dishIntro'=>$special['content'],'likeNum'=>"0"]);
+            MenuPo1::create(['ImgId'=>$special['imgId'],'commentNum'=>"0",'dishName'=>$special['title'],'dishIntro'=>$special['content'],'likeNum'=>"0"]);
         }
         return 'success';
     }
