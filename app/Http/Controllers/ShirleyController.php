@@ -162,7 +162,7 @@ class ShirleyController extends Controller
         $special->save();
         Message1::create([
             'userId'=>$special->user_id,
-            'userAvatar'=>User::where('id',$special->user_id)->first()->image,
+            'userAvatar'=>User1::where('id',$special->user_id)->first()->image,
             'title'=>'系统消息',
             'contentDate'=>Carbon::now()->format("Y-m-d H:i:s"),
             'content'=>"您的日记被人评论啦，快去回复吧",
