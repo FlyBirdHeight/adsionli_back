@@ -63,4 +63,15 @@ class ChatController extends Controller
             return $this->failed('edit failed');
         }
     }
+
+    public function chatRoom($id)
+    {
+        $user = $this->user->findUserByid($id);
+        if (count($user->chatRoom)!=0){
+            return $this->info('success',$user->chatRoom);
+        }else{
+            return $this->info('error','empty');
+        }
+
+    }
 }
