@@ -134,7 +134,7 @@ class ShirleyController extends Controller
     }
 
     public function getComment(Request $request){
-        $name = $request->get('title');
+        $name = $request->get('special_title');
         $special = Special1::where('title',$name)->first();
         $special_id = $special->id;
         $comments = CommentDetail1::where('special_id',$special_id)->orderBy('created_at','desc')->get();
@@ -156,7 +156,7 @@ class ShirleyController extends Controller
     public function addComment(Request $request){
         $user = User1::where('id',$request->get('user_id'))->first();
         $data = [
-            'special_id'=>Special1::where('title',$request->get('name'))->first()->id,
+            'special_id'=>Special1::where('title',$request->get('special_title'))->first()->id,
             'nickName' => $user->user_name,
             'userLogo' => $user->image,
             'content' => $request->get('content'),
