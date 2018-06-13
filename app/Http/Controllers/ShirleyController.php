@@ -178,4 +178,10 @@ class ShirleyController extends Controller
         $reply = ReplyDetail1::create($data);
         return $reply;
     }
+
+    public function getSpecialByTitle(Request $request){
+        $name = $request->get('special_title');
+        $special = Special1::where('title',$name)->first();
+        return $special;
+    }
 }
