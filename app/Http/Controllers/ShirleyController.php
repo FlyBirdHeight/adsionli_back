@@ -155,8 +155,11 @@ class ShirleyController extends Controller
 
     public function addComment(Request $request){
         $user = User1::where('id',$request->get('user_id'))->first();
+        $special = Special1::where('title',$request->get('special_title'))->first();
+        $special->increment(commentNum);
+        $special->save();
         $data = [
-            'special_id'=>Special1::where('title',$request->get('special_title'))->first()->id,
+            'special_id'=>$special->id,
             'nickName' => $user->user_name,
             'userLogo' => $user->image,
             'content' => $request->get('content'),
@@ -168,6 +171,9 @@ class ShirleyController extends Controller
 
     public function addReply(Request $request){
         $user = User1::where('id',$request->get('user_id'))->first();
+        $comment = CommentDetail1::where('id',$request->get('commentId'))->first();
+        $comment->increment(replyTotal);
+        $comment->save();
         $data = [
             'nickName' => $user->user_name,
             'userLogo' => $user->image,
