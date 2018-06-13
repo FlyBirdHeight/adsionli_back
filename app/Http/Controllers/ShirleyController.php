@@ -190,7 +190,7 @@ class ShirleyController extends Controller
             'userAvatar'=>$user->image,
             'title'=>'系统消息',
             'contentDate'=>Carbon::now()->format("Y-m-d H:i:s"),
-            'content'=>"您的日记被人回复啦，快去看看吧",
+            'content'=>"您的评论被人回复啦，快去看看吧",
             'special_id'=>Special1::where('id',$comment->special_id)->first()->id
         ]);
         $data = [
