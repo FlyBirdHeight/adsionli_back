@@ -11,6 +11,7 @@ use App\Special1;
 use App\TalentShow1;
 use App\User;
 use App\User1;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ShirleyController extends Controller
@@ -159,6 +160,13 @@ class ShirleyController extends Controller
         $special = Special1::where('title',$request->get('special_title'))->first();
         $special->increment('commentNum');
         $special->save();
+        Message1::create([
+            'userId'=>$special->user_id,
+            'userAvatar'=>$user->image,
+            'title'=>'系统消息','contentDate'=>Carbon::now()->format("Y-m-d H:i:s"),
+            'content'=>"您的日记被人评论啦，快去回复吧",
+            "special_id"=>$special->id
+        ]);
         $data = [
             'special_id'=>$special->id,
             'nickName' => $user->user_name,
@@ -173,8 +181,17 @@ class ShirleyController extends Controller
     public function addReply(Request $request){
         $user = User1::where('id',$request->get('user_id'))->first();
         $comment = CommentDetail1::where('id',$request->get('commentId'))->first();
+        $user1 = User1::where('user_name',$comment->nickName)->first();
         $comment->increment('replyTotal');
         $comment->save();
+        Message1::create([
+            'userId'=>$user1->id,
+            'userAvatar'=>$user->image,
+            'title'=>'系统消息',
+            'contentDate'=>Carbon::now()->format("Y-m-d H:i:s"),
+            'content'=>"您的日记被人回复啦，快去看看吧",
+            'special_id'=>Special1::where('id',$comment->special_id)->first()->id
+        ]);
         $data = [
             'nickName' => $user->user_name,
             'userLogo' => $user->image,
