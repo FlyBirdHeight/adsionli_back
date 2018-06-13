@@ -205,7 +205,7 @@ class ShirleyController extends Controller
 
     public function addLove(Request $request){
         $special = Special1::where('title',$request->get('special_title'))->first();
-        $love = Love1::where(['userId'=>$request->get('userId'),'specialId'=>$special->id])->get();
+        $love = Love1::where(['userId'=>$request->get('userId'),'specialId'=>$special->id])->first();
         if (count($love)!=0){
             $love->del();
             $special->decrement('likeNum');
