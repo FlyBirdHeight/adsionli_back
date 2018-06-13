@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\CommentDetail1;
 use App\MenuPo1;
 use App\Message1;
+use App\ReplyDetail1;
 use App\Special1;
 use App\TalentShow1;
 use App\User;
@@ -129,5 +131,51 @@ class ShirleyController extends Controller
         }else{
             return 'empty';
         }
+    }
+
+    public function getComment(Request $request){
+        $name = $request->get('title');
+        $special = Special1::where('title',$name)->first();
+        $special_id = $special->id;
+        $comments = CommentDetail1::where('special_id',$special_id)->orderBy('created_at','desc')->get();
+        if (count($comments)!=0){
+            foreach ($comments as $comment){
+                $reply = ReplyDetail1::where('commentId',$comment['id'])->orderBy('created_at','desc')->get();
+                if (count($reply)!=0){
+                    $comment['replyList'] = $reply;
+                }else{
+                    $comment['replyList'] = null;
+                }
+            }
+            return $comments;
+        }else{
+            return 'empty';
+        }
+    }
+
+    public function addComment(Request $request){
+        $user = User1::where('id',$request->get('user_id'))->first();
+        $data = [
+            'special_id'=>Special1::where('title',$request->get('name'))->first()->id,
+            'nickName' => $user->user_name,
+            'userLogo' => $user->image,
+            'content' => $request->get('content'),
+            'imgId' => 'xcclsscrt0tev11ok364',
+        ];
+        $comment = CommentDetail1::create($data);
+        return $comment;
+    }
+
+    public function addReply(Request $request){
+        $user = User1::where('id',$request->get('user_id'))->first();
+        $data = [
+            'nickName' => $user->user_name,
+            'userLogo' => $user->image,
+            'commentId'=>$request->get('commentId'),
+            'content' => $request->get('content'),
+            'status' => '01'
+        ];
+        $reply = ReplyDetail1::create($data);
+        return $reply;
     }
 }
