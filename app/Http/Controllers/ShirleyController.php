@@ -203,12 +203,14 @@ class ShirleyController extends Controller
     }
 
     public function addLove(Request $request){
-        $love = Love1::where(['userId'=>$request->get('userId'),'specialId'=>$request->get('specialId')])->get();
+        $special = Special1::where('title',$request->get('special_title'))->first()->id;
+        $love = Love1::where(['userId'=>$request->get('userId'),'specialId'=>$special])->get();
         if (count($love)!=0){
             $love->del();
             return 'del success';
         }else{
-            $love = Love1::create(['userId'=>$request->get('userId'),'specialId'=>$request->get('specialId')]);
+
+            $love = Love1::create(['userId'=>$request->get('userId'),'specialId'=>$special]);
             return 'add success';
         }
     }
