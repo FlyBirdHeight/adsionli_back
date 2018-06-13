@@ -236,4 +236,9 @@ class ShirleyController extends Controller
             return 'add success';
         }
     }
+
+    public function getSpecialById(Request $request){
+        $special = Special1::findOrFail($request->get('id'));
+        return $special;
+    }
 }
