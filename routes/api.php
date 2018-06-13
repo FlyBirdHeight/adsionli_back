@@ -80,4 +80,7 @@ Route::middleware('api')->prefix('v2')->group(function (){
     Route::get('menupol','ShirleyController@getSpecialByCommentNum');
     Route::get('userSpecial','ShirleyController@getSpecialUser');
     Route::get('message/{id}','ShirleyController@getMessage');
+    Route::post('getComment','ShirleyController@getComment');
+    Route::post('addComment','ShirleyController@addComment');
+    Route::post('addReply','ShirleyController@addReply');
 });
