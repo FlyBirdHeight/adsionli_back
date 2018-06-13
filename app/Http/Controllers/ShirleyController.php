@@ -239,6 +239,7 @@ class ShirleyController extends Controller
 
     public function getSpecialById(Request $request){
         $special = Special1::findOrFail($request->get('id'));
+        $special['user'] = User1::where('id',$special->user_id)->first();
         return $special;
     }
 }
