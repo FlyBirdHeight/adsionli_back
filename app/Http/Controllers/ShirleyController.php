@@ -182,6 +182,7 @@ class ShirleyController extends Controller
     public function getSpecialByTitle(Request $request){
         $name = $request->get('special_title');
         $special = Special1::where('title',$name)->first();
+        $special['user'] = User1::where('id',$special->user_id)->first();
         return $special;
     }
 }
