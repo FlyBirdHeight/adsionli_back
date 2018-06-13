@@ -160,14 +160,6 @@ class ShirleyController extends Controller
         $special = Special1::where('title',$request->get('special_title'))->first();
         $special->increment('commentNum');
         $special->save();
-        Message1::create([
-            'userId'=>$special->user_id,
-            'userAvatar'=>User1::where('id',$special->user_id)->first()->image,
-            'title'=>'系统消息',
-            'contentDate'=>Carbon::now()->format("Y-m-d H:i:s"),
-            'content'=>"您的日记被人评论啦，快去回复吧",
-            "special_id"=>$special->id
-        ]);
         $data = [
             'special_id'=>$special->id,
             'nickName' => $user->user_name,
@@ -176,6 +168,14 @@ class ShirleyController extends Controller
             'imgId' => 'xcclsscrt0tev11ok364',
         ];
         $comment = CommentDetail1::create($data);
+        Message1::create([
+            'userId'=>$special->user_id,
+            'userAvatar'=>User1::where('id',$special->user_id)->first()->image,
+            'title'=>'系统消息',
+            'contentDate'=>Carbon::now()->format("Y-m-d H:i:s"),
+            'content'=>"您的日记被人评论啦，快去回复吧",
+            "special_id"=>$special->id
+        ]);
         return $comment;
     }
 
