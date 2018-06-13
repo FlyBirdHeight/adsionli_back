@@ -147,7 +147,7 @@ class ShirleyController extends Controller
                     $comment['replyList'] = null;
                 }
             }
-            return $comments;
+            return json_encode(['code'=>1000,'message'=>'查看评论成功','data'=>['total'=>count($comments),'list'=>$comments]]);
         }else{
             return 'empty';
         }
