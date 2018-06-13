@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CommentDetail1;
+use App\Love1;
 use App\MenuPo1;
 use App\Message1;
 use App\ReplyDetail1;
@@ -190,5 +191,25 @@ class ShirleyController extends Controller
         $special = Special1::where('title',$name)->first();
         $special['user'] = User1::where('id',$special->user_id)->first();
         return $special;
+    }
+
+    public function isLove(Request $request){
+        $love = Love1::where(['userId','specialId'],[$request->get('userId'),$request->get('specialId')])->get();
+        if (count($love)!=0){
+            return 'success';
+        }else{
+            return 'error';
+        }
+    }
+
+    public function addLove(Request $request){
+        $love = Love1::where(['userId','specialId'],[$request->get('userId'),$request->get('specialId')])->get();
+        if (count($love)!=0){
+            $love->del();
+            return 'del success';
+        }else{
+            $love = Love1::create(['userId'=>$request->get('userId'),'specialId'=>$request->get('specialId')]);
+            return 'add success';
+        }
     }
 }
