@@ -194,7 +194,7 @@ class ShirleyController extends Controller
     }
 
     public function isLove(Request $request){
-        $love = Love1::where(['userId','specialId'],[$request->get('userId'),$request->get('specialId')])->get();
+        $love = Love1::where(['userId'=>$request->get('userId'),'specialId'=>$request->get('specialId')])->get();
         if (count($love)!=0){
             return 'success';
         }else{
@@ -203,7 +203,7 @@ class ShirleyController extends Controller
     }
 
     public function addLove(Request $request){
-        $love = Love1::where(['userId','specialId'],[$request->get('userId'),$request->get('specialId')])->get();
+        $love = Love1::where(['userId'=>$request->get('userId'),'specialId'=>$request->get('specialId')])->get();
         if (count($love)!=0){
             $love->del();
             return 'del success';
