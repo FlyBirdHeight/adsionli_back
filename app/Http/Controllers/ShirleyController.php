@@ -212,7 +212,7 @@ class ShirleyController extends Controller
             $special->save();
             return 'del success';
         }else{
-            $love = Love1::create(['userId'=>$request->get('userId'),'specialId'=>$special]);
+            $love = Love1::create(['userId'=>$request->get('userId'),'specialId'=>$special->id]);
             $special->increment('likeNum');
             $special->save();
             return 'add success';
