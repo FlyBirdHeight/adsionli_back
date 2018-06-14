@@ -242,4 +242,9 @@ class ShirleyController extends Controller
         $special['user'] = User1::where('id',$special->user_id)->first();
         return $special;
     }
+
+    public function getAllSpecial(){
+        $specials = \DB::table('specials')->select('*')->orderBy('created_at','desc')->get();
+        return $specials;
+    }
 }

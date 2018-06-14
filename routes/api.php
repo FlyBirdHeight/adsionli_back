@@ -87,4 +87,5 @@ Route::middleware('api')->prefix('v2')->group(function (){
     Route::post('isLove','ShirleyController@isLove');
     Route::post('addLove','ShirleyController@addLove');
     Route::post('getSpecialById','ShirleyController@getSpecialById');
+    Route::get('getAllSpecial','ShirleyController@getAllSpecial');
 });
