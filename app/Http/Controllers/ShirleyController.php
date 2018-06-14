@@ -244,7 +244,7 @@ class ShirleyController extends Controller
     }
 
     public function getAllSpecial(){
-        $specials = \DB::table('specials')->select('*')->orderBy('created_at','desc')->get();
+        $specials = \DB::table('special1s')->select('*')->orderBy('created_at','desc')->get();
         return $specials;
     }
 }
