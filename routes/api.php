@@ -22,10 +22,12 @@ Route::middleware('api')->prefix('v1')->group(function (){
     Route::prefix('upload')->group(function (){
         Route::post('/music','MusicController@uploadMusic');
         Route::post('/image','FileController@uploadImage');
+        Route::post('/picture','FileController@uploadPicture');
     });
 
     Route::prefix('add')->group(function (){
         Route::post('/music','MusicController@addMusic');
+
         Route::post('/addBlog','BlogController@addBlog');
         Route::post('/user','UserController@register');
         Route::post('/comment','BlogController@addComment');

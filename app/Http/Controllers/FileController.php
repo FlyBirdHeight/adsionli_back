@@ -33,4 +33,17 @@ class FileController extends Controller
             return json_encode(['status'=>'error']);
         }
     }
+
+    public function uploadPicture(Request $request){
+        if ($request->hasFile('picture')){
+            $file = $request->file('picture');
+            $file_name = time().$file->getClientOriginalName();
+            $url = 'http://127.0.0.1/images/'.$file_name;
+            $file->move('images/',$file_name);
+            $image = Image::make('images/'.$file_name)->resize(150,150)->save('images/'.$file_name);
+            return $this->info('success',$url);
+        }else{
+            return json_encode(['status'=>'error']);
+        }
+    }
 }

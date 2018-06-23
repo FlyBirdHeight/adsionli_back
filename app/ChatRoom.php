@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ChatRoom extends Model
 {
-    protected $fillable = ['name','user_count','max_user_count','user_id','agree'];
+    protected $fillable = ['name','user_count','max_user_count','user_id','agree','avatar'];
 
     public function user(){
         return $this->belongsToMany(User::class,'user_chatroom','chatRoom_id','user_id');
