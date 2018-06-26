@@ -15,6 +15,7 @@ Route::middleware('api')->prefix('v1')->group(function (){
     Route::get('/blog/{id}','BlogController@blog');
     Route::get('/blog/{id}/comment','BlogController@comment');
     Route::get('/chatRoom/{id}','ChatController@chatRoom');
+    Route::get('/user/info/{id}','UserController@findUser');
 
     Route::post('/blog','BlogController@all');
     Route::post('/login','UserController@login');

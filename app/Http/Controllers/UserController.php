@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\RegisterMail;
 use App\Repositories\UserRepository;
 use App\User;
+use App\utils\Responses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redis;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Redis;
 class UserController extends Controller
 {
     use Traits\ProxyHelpers;
+    use Responses;
     private $user;
     public function __construct(UserRepository $userRepository)
     {
@@ -85,6 +87,15 @@ class UserController extends Controller
             }
         }else{
             return json_encode(['status'=>'isAccess']);
+        }
+    }
+
+    public function findUser($id){
+        $user = $this->user->findUserByid($id);
+        if ($user!=null){
+            return $this->info('success',$user);
+        }else{
+            return $this->failed();
         }
     }
 }

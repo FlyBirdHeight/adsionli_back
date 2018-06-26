@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\ChatRepository;
 use App\Repositories\UserRepository;
 use App\utils\Responses;
+use Carbon\Carbon;
 use GatewayClient\Gateway;
 use Illuminate\Http\Request;
 
@@ -80,6 +81,7 @@ class ChatController extends Controller
         if ($room!=null){
             $room->userList;
             $room->admin;
+            $room->created_at = date('Y-m-d',strtotime($room->created_at));
             return $this->info('success',['room'=>$room]);
         }else{
             return $this->failed('failed');
