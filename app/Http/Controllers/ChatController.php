@@ -74,4 +74,15 @@ class ChatController extends Controller
         }
 
     }
+
+    public function roomInfo($id){
+        $room = $this->chat->find($id);
+        if ($room!=null){
+            $room->userList;
+            $room->admin;
+            return $this->info('success',['room'=>$room]);
+        }else{
+            return $this->failed('failed');
+        }
+    }
 }

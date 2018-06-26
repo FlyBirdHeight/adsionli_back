@@ -27,7 +27,6 @@ Route::middleware('api')->prefix('v1')->group(function (){
 
     Route::prefix('add')->group(function (){
         Route::post('/music','MusicController@addMusic');
-
         Route::post('/addBlog','BlogController@addBlog');
         Route::post('/user','UserController@register');
         Route::post('/comment','BlogController@addComment');
@@ -46,9 +45,9 @@ Route::middleware('api')->prefix('v1')->group(function (){
         Route::patch('/chatRoom','ChatController@editRoom');
     });
 
-//    Route::prefix('chat')->group(function (){
-//
-//    });
+    Route::prefix('room')->group(function (){
+        Route::get('/info/{id}','ChatController@roomInfo');
+    });
 });
 
 
