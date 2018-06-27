@@ -49,4 +49,11 @@ class User extends Authenticatable
     public function hasChatRoom(){
         return $this->hasMany(ChatRoom::class,'user_id');
     }
+
+    public function followers(){
+        return $this->belongsToMany(self::class,'followers','follower_id','followed_id')->withTimestamps();
+    }
+    public function followersUser(){
+        return $this->belongsToMany(self::class,'followers','followed_id','follower_id')->withTimestamps();
+    }
 }
