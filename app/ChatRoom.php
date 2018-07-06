@@ -9,7 +9,7 @@ class ChatRoom extends Model
     protected $fillable = ['name','user_count','max_user_count','user_id','agree','avatar'];
 
     public function userList(){
-        return $this->belongsToMany(User::class,'user_chatroom','chatRoom_id','user_id')->select('id','name','avatar')->without('pivot');
+        return $this->belongsToMany(User::class,'user_chatroom','chatRoom_id','user_id')->withPivot('nick_name')->select('id','name','avatar');
     }
 
     public function userJoinRoom($user_id){
