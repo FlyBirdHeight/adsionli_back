@@ -89,9 +89,12 @@ class ChatController extends Controller
     }
 
     public function changeNickName(Request $request){
-        $room = \DB::table('user_chatroom')->where(['user_id'=>$request->get('userId'),'roomId'=>$request->get('roomId')])->get();
-        $room->nick_name = $request->get('name');
-        $room->save();
-        return $this->info('success','success');
+        $room = \DB::table('user_chatroom')->where(['user_id'=>$request->get('userId'),'chatRoom_id'=>$request->get('roomId')])->update(['nick_name'=>$request->get('name')]);
+        if ($room){
+            return $this->info('success',$room);
+        }else{
+            return $this->info('error','error');
+        }
+
     }
 }
