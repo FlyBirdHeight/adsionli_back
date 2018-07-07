@@ -13,7 +13,7 @@ class AddNameIntoUserChatroom extends Migration
      */
     public function up()
     {
-        Schema::table('user_chatroom', function (Blueprint $table) {
+        Schema::table('user_chatRoom', function (Blueprint $table) {
             $table->string('nick_name')->default('');
         });
     }
