@@ -51,7 +51,7 @@ class FileController extends Controller
         if ($request->hasFile('picture')){
             $file = $request->file('picture');
             $file_name = time().$file->getClientOriginalName();
-            $url = 'http://127.0.0.1/images/'.$file_name;
+            $url = 'http://101.132.71.227/images/'.$file_name;
             $file->move('images/',$file_name);
             $image = Image::make('images/'.$file_name)->save('images/'.$file_name);
             return $this->info('success',$url);
