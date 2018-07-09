@@ -24,6 +24,7 @@ Route::middleware('api')->prefix('v1')->group(function (){
         Route::post('/music','MusicController@uploadMusic');
         Route::post('/image','FileController@uploadImage');
         Route::post('/picture','FileController@uploadPicture');
+        Route::post('/short','FileController@shortUploadPicture');
     });
 
     Route::prefix('add')->group(function (){
