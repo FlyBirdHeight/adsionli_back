@@ -43,7 +43,7 @@ class User extends Authenticatable
     }
 
     public function chatRoom(){
-        return $this->belongsToMany(ChatRoom::class,'user_chatroom','user_id','chatRoom_id')->withPivot('nick_name');
+        return $this->belongsToMany(ChatRoom::class,'user_chatroom','user_id','chatRoom_id')->withPivot('nick_name','notify');
     }
 
     public function hasChatRoom(){
