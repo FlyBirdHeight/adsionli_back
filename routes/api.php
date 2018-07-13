@@ -50,5 +50,6 @@ Route::middleware('api')->prefix('v1')->group(function (){
     Route::prefix('room')->group(function (){
         Route::get('/info/{id}','ChatController@roomInfo');
         Route::patch('/nickName','ChatController@changeNickName');
+        Route::patch('/notify','ChatController@uploadNotify');
     });
 });
