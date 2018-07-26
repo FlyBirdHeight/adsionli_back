@@ -63,9 +63,9 @@ trait FriendAdd
         if ($this->is_friend($user_id,$friend_user_id)){
             Redis::srem("graph:user:{$user_id}:friend",$friend_user_id);
             Redis::srem("graph:user:{$friend_user_id}:friend",$user_id);
-            return "success";
+            return true;
         }else{
-            return "error";
+            return false;
         }
     }
 
@@ -106,16 +106,16 @@ trait FriendAdd
     /**
      * @param $user_id
      * @param $allow_user_id
-     * @return string
+     * @return boolean
      * 被加好友方，不同意加好友
      */
     public function allow_del($user_id,$allow_user_id){
         if (self::is_add($user_id,$allow_user_id)){
             Redis::srem("graph:user:{$user_id}:add",$allow_user_id);
             Redis::srem("graph:user:$allow_user_id:allow",$user_id);
-            return "success";
+            return true;
         }else{
-            return "error";
+            return false;
         }
     }
 
