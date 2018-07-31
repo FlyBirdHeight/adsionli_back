@@ -52,4 +52,15 @@ Route::middleware('api')->prefix('v1')->group(function (){
         Route::patch('/nickName','ChatController@changeNickName');
         Route::patch('/notify','ChatController@uploadNotify');
     });
+
+    Route::prefix('friend')->group(function (){
+        Route::get('/friendList/{id}','FirendController@get_all_friend');
+        Route::get('/addList/{id}','FirendController@get_all_add');
+        Route::get('/allowList/{id}','FirendController@get_all_allow');
+        Route::delete('/del/friend','FirendController@del_friend');
+        Route::delete('/del/add','FirendController@del_add');
+        Route::delete('/del/allow','FirendController@del_allow');
+        Route::post('/add/friend','FirendController@addFriend');
+        Route::patch('/agree/friend','FirendController@agreeFriend');
+    });
 });
