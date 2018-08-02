@@ -63,4 +63,11 @@ Route::middleware('api')->prefix('v1')->group(function (){
         Route::post('/add/friend','FirendController@addFriend');
         Route::patch('/agree/friend','FirendController@agreeFriend');
     });
+
+    Route::prefix('admin')->group(function (){
+        Route::get('/users','AdminController@get_all_user');
+        Route::get('/musics','AdminController@get_all_music');
+        Route::get('/article','AdminController@get_all_article');
+        Route::get('/index','AdminController@index');
+    });
 });
